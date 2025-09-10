@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
+PLOT_HISTOGRAM = False
 
 def search_bins(input, edges):
     length = len(edges)
@@ -29,7 +30,7 @@ def search_bins(input, edges):
     return min  # index
 
 def my_histogram(list, M, range):
-    
+
     bin_size = (range[1] - range[0]) / M
 
     bin_edges = [range[0]]
@@ -72,32 +73,47 @@ def main():
 
         end_time = time.time()
         elapsed_time = end_time - start_time
-        print(elapsed_time)
         np_time.append(elapsed_time)
 
         my_hist = np.array(my_hist)
         my_bin_edges = np.array(my_bin_edges)
         hist = np.array(hist)
-        
+        bin_edges = np.array(bin_edges)
+
+        # print(bin_edges)
+        # print(my_bin_edges)
         # print(my_hist)
         # print(hist)
 
-        # print(hist == my_hist)
         if np.any(hist != my_hist):
             print("PROBLEM.")
 
-        # # plot my version
-        # plt.subplot(1,2,1)
-        # plt.bar(bin_edges[:-1], my_hist, width=np.diff(my_bin_edges), align="edge", alpha=0.5, label="my_hist")
-        # plt.title("my_histogram")
+        # if np.any(bin_edges != my_bin_edges):
+        #     print("BIN PROBLEM.")
 
-        # # plot numpy version
-        # plt.subplot(1,2,2)
-        # plt.bar(bin_edges[:-1], hist, width=np.diff(bin_edges), align="edge", alpha=0.3, label="np.histogram")
-        # plt.title("np.histogram")
+        if PLOT_HISTOGRAM:
+            # plot my version
+            plt.subplot(1,2,1)
+            plt.bar(my_bin_edges[:-1], my_hist, width=np.diff(my_bin_edges), align="edge", alpha=0.5, label="my_hist")
+            plt.title("my_histogram")
 
-        # plt.tight_layout()
-        # plt.show()
+            # plot numpy version
+            plt.subplot(1,2,2)
+            plt.bar(bin_edges[:-1], hist, width=np.diff(bin_edges), align="edge", alpha=0.5, label="np.histogram")
+            plt.title("np.histogram")
+
+            plt.tight_layout()
+            plt.show()
+
+    
+    print("\nRuntime comparison table:")
+    print(f"{'N':>10} | {'my_time (s)':>12} | {'np_time (s)':>12}")
+    print("-" * 40)
+
+    for N, t_my, t_np in zip(N_list, my_time, np_time):
+        print(f"{N:10d} | {t_my:12.6e} | {t_np:12.6e}")
+
+    # Plot the timing data on a logarithmic graph.
     plt.plot(N_list, my_time, marker='o', label="my_histogram")
     plt.plot(N_list, np_time, marker='s', label="np.histogram")
     plt.xscale("log")   # N grows by powers of 10
