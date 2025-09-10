@@ -1,0 +1,6 @@
+"""
+This is some Pseudocode to answer question 1b
+"""
+
+PRINT "This is my Pseudocode"
+
