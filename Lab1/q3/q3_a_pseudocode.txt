@@ -1,0 +1,21 @@
+"""
+Pseudocode for a histogram
+"""
+
+M = ... # define an M, the number of bins to have
+
+range = (a, b) # The range of the histogram
+
+random_list = SAMPLE_FROM_NORMAL(N) # Samples N random numbers from the normal distribution
+
+bin_size = (b - a) / M
+bin_edges = [a, a + bin_size, ..., b] # define bin_edges, equal bins for number
+
+hist = [] # an array with size M
+
+FOR i in random_list:
+    # find the correct bin for this input
+    x = BINARY_SEARCH_BINS(i)  # this function should return the index of where i should go
+    hist[x] += 1
+ENDFOR
+

@@ -1,0 +1,21 @@
+"""
+This is some Pseudocode to answer question 1b
+"""
+
+PRINT "This is my Pseudocode"
+
+# First we need some kind of initial velocities and positions
+
+x0, y0, vx0, vy0 = TAKE_FLOAT_INPUTS("provide 3 numbers for x, y positions and initial velocities")
+
+t_max = ... # Define some maximum time to go up to
+dt = ... # Define a time step
+
+x_arr = [x]
+y_arr = [y]
+t_arr = [0]
+
+t = 0
+WHILE t < t_max:
+    vx0 = vx0 + - (G
+
