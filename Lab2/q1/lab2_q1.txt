@@ -1,0 +1,47 @@
+"""
+PSEUDOCODE FOR Q1. Part a
+"""
+
+INITIALIZE an array cdata from cdata.txt  # Use np.loadtxt()
+
+ASSIGN truth_sigma = np.std(cdata, ddof)
+
+ASSIGN n to be the length of the dataset
+
+CALCULATE sigma_1:
+    ASSIGN mean to be the mean of dataset cdata
+    sum = 0
+    FOR i in the range of cdata's indexes:
+        sum += (cdata[i] - mean) ** 2
+    ENDFOR
+    sigma_1 = sqrt( sum / (n-1) )
+sigma_1 is calculated
+
+CALCULATE sigma_2:
+    sum = 0
+    array_sum = 0
+    FOR i in the range of cdata's indexes:
+        array_sum += cdata[i]
+        sum += (cdata[i]) ** 2
+    ENDFOR
+
+    mean = array_sum / n 
+    temp = sum - ( n * (mean ** 2) )
+
+    IF temp < 0:
+        print("Std2 had sum less than 0 !!!!!!!!!!")
+    END IF
+
+    sigma_2 = sqrt(temp / (n - 1))
+sigma_2 is calculated
+
+
+CALCULATE relative errors:
+    relative_error_1 = ABSOLUTE_VAL(sigma_1 - truth_sigma) / truth_sigma 
+    relative_error_2 = ABSOLUTE_VAL(sigma_2 - truth_sigma) / truth_sigma
+relative errors are calculated. Task is complete
+
+PRINT "Relative error for eq 1 is", relative_error_1
+PRINT "Relative error for eq 2 is", relative_error_2
+
+END
