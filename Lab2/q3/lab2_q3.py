@@ -52,6 +52,7 @@ def main():
     
     r_values = np.linspace(0.25e-3, 5e-3, 100)  # 0.25 mm to 5 mm
     n = 50                                      # must be even (adjust this number until the y axis is ~10^-6   )
+    # n = 50 is a good number
 
     V_by_simpson = [V_simpson(r, z, Q, l, n) for r in r_values]
     V_by_exact = [V_exact(r, Q, l) for r in r_values]
@@ -62,7 +63,7 @@ def main():
     plt.xlabel("r (mm)")
     plt.ylabel("V(r, 0)")
     plt.legend()
-    plt.title("V(r,0): Numerical vs Exact")
+    plt.title(f"V(r,0): Numerical vs Exact(N ={n})")
     plt.show()
 
     plt.figure()

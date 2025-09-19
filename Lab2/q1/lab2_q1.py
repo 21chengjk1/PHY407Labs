@@ -89,13 +89,13 @@ def main():
     random_sigma_1 = std_1(random_array)
     random_sigma_2 = std_2(random_array)
     random_truth_sigma = np.std(random_array, ddof=1)
-    relative_error_1 = abs(random_sigma_1 - truth_sigma) / random_truth_sigma 
-    relative_error_2 = abs(random_sigma_2 - truth_sigma) / random_truth_sigma
+    relative_error_1 = abs(random_sigma_1 - random_truth_sigma) / random_truth_sigma 
+    relative_error_2 = abs(random_sigma_2 - random_truth_sigma) / random_truth_sigma
     print("Relative error for eq 1 with a 0 mean", relative_error_1)
     print("Relative error for eq 2 with a 0 mean", relative_error_2)
     if PART_D_WORKAROUND:
         random_sigma_shift = std_2_workaround(random_array)
-        relative_error_shift = abs(random_sigma_shift - truth_sigma) / random_truth_sigma
+        relative_error_shift = abs(random_sigma_shift - random_truth_sigma) / random_truth_sigma
         print("Relative error for eq 2(shifted) with a 0 mean", relative_error_shift)
 
 
@@ -106,13 +106,13 @@ def main():
     random_sigma_1 = std_1(random_array)
     random_sigma_2 = std_2(random_array)
     random_truth_sigma = np.std(random_array, ddof=1)
-    relative_error_1 = abs(random_sigma_1 - truth_sigma) / random_truth_sigma 
-    relative_error_2 = abs(random_sigma_2 - truth_sigma) / random_truth_sigma
+    relative_error_1 = abs(random_sigma_1 - random_truth_sigma) / random_truth_sigma 
+    relative_error_2 = abs(random_sigma_2 - random_truth_sigma) / random_truth_sigma
     print("Relative error for eq 1 with a 1.e7 mean", relative_error_1)
     print("Relative error for eq 2 with a 1.e7 mean", relative_error_2)
     if PART_D_WORKAROUND:
         random_sigma_shift = std_2_workaround(random_array)
-        relative_error_shift = abs(random_sigma_shift - truth_sigma) / random_truth_sigma
+        relative_error_shift = abs(random_sigma_shift - random_truth_sigma) / random_truth_sigma
         print("Relative error for eq 2(shifted) with a 1.e7 mean", relative_error_shift)
 
     print("=========END=========")
