@@ -44,13 +44,13 @@ def main():
     print(f"{'h':>12} {'Numerical Derivative':>25} {'Absolute Error':>25}")
     print("-" * 65)
     for h, d, e in zip(h_values, numerical_derivatives, abs_errors):
-        print(f"{h:12.1e} {d:25.15e} {e:25.15e}")
+        print(f"{h:12.1e} {d:25.3e} {e:25.3e}")
 
     # Plot error vs h on a log-log scale
     plt.figure()
-    plt.plot(h_values, abs_errors, marker="o")
+    plt.plot(h_values, abs_errors, marker="o", label="Forward Difference")
     if ADD_CENTRAL_DIFFERENCE_SCHEME:
-        plt.plot(h_values,  abs_errors_central, marker="o")
+        plt.plot(h_values,  abs_errors_central, marker="o", label="Central Difference")
     plt.xscale('log')  # Set the y-axis to a logarithmic scale
     plt.yscale('log')  # Set the y-axis to a logarithmic scale
     plt.xlabel("Step size h")
@@ -58,6 +58,7 @@ def main():
     plt.title("Error in numerical derivative vs step size")
     plt.grid(True)
     plt.xticks(h_values)
+    plt.legend()
     plt.show()
 
     print("----------END----------")
