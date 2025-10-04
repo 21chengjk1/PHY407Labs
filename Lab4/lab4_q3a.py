@@ -3,12 +3,6 @@ Welcome to the Code for Lab 4 Question 3 part a in PHY407
 
 If you're running the code as organised in the Repo, please run code from the directory Lab4
 """
-
-"""
-Welcome to the Code for Lab 4 Question 3 in PHY407
-
-If you're running the code as organised in the Repo, please run code from the directory Lab4
-"""
 import numpy as np
 import matplotlib.pyplot as plt
 
