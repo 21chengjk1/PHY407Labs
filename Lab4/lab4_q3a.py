@@ -1,10 +1,18 @@
 """
+Welcome to the Code for Lab 4 Question 3 part a in PHY407
+
+If you're running the code as organised in the Repo, please run code from the directory Lab4
+"""
+
+"""
 Welcome to the Code for Lab 4 Question 3 in PHY407
 
 If you're running the code as organised in the Repo, please run code from the directory Lab4
 """
 import numpy as np
 import matplotlib.pyplot as plt
+
+SHOW_PLOTS = True
 
 # Global Variables used by f
 c = 2
@@ -14,18 +22,19 @@ def f(x):
 def relaxation(func, init_x, dx, threshold):
     """
     Carries out the relaxation method on a function func
-    Returns x_list, the list of x values. 
+    Returns x_list, the list of x values, and iterations.
     So the final guess should be at x_list[-1]
     """
+    iterations = 0
     x_list = [init_x] 
     while dx > threshold:
         x_list.append(func(x_list[-1]))
         dx = np.abs(x_list[-1] - x_list[-2])
+        iterations += 1
 
-    return x_list
+    return x_list, iterations
 
-
-def part_a():
+def main():
     global c
     print("----------<PART_A>----------")
     # Exercise 6.10: Consider the equation x = 1 - e^-cx, where c is a known parameter and x
@@ -35,16 +44,17 @@ def part_a():
     # a)    Write a program to solve this equation for x using the relaxation method for the
     #       case c = 2. Calculate your solution to an accuracy of at least 10- 6 
 
-    x_list = relaxation(f, init_x=0.5, dx=1, threshold=1e-6)
-    print(x_list[-1])
+    x_list, _ = relaxation(f, init_x=0.5, dx=1, threshold=1e-6)
+    print("Estimate for solution to x = 1 - e^-cx. x =", x_list[-1])
 
-    plt.figure()
-    plt.title(r"Solve $x = 1 - e^{-cx}$ with relaxation method")
-    plt.plot(x_list)
-    plt.xlabel("Iteration number")
-    plt.ylabel(r"Solution to $x = 1 - e^{-cx}$")
-    plt.grid()
-    plt.show()
+    if SHOW_PLOTS:
+        plt.figure()
+        plt.title(r"Solve $x = 1 - e^{-cx}$ with relaxation method")
+        plt.plot(x_list)
+        plt.xlabel("Iteration number")
+        plt.ylabel(r"Solution to $x = 1 - e^{-cx}$")
+        plt.grid()
+        plt.show()
 
     # b)    Modify your program to calculate the solution for values of c from 0 to 3 in steps
     #       of 0.01 and make a plot of x as a function of c. You should see a clear transition
@@ -57,28 +67,24 @@ def part_a():
 
     for some_c in c_values:
         c = some_c
-        x_list = relaxation(f, init_x=0.5, dx=1, threshold=1e-6)
+        x_list, _ = relaxation(f, init_x=0.5, dx=1, threshold=1e-6)
         x = x_list[-1]
         x_values.append(x)
 
     # Plot result
-    plt.figure()
-    plt.title(r"Phase transition: Solution of $x = 1 - e^{-cx}$")
-    plt.plot(c_values, x_values, label="Solution")
-    plt.xlabel(r"$c$")
-    plt.ylabel(r"Solution $x$")
-    plt.legend()
-    plt.grid()
-    plt.show()
+    if SHOW_PLOTS:
+        plt.figure()
+        plt.title(r"Phase transition: Solution of $x = 1 - e^{-cx}$")
+        plt.plot(c_values, x_values, label="Solution")
+        plt.xlabel(r"$c$")
+        plt.ylabel(r"Solution $x$")
+        plt.legend()
+        plt.grid()
+        plt.show()
 
 
     # HAND IN YOUR PLOT
     print("----------</PART_A>----------")
-
-
-def main():
-    part_a()    # Does part a
-
 
 
 if __name__ == "__main__":
