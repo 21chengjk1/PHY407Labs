@@ -39,7 +39,7 @@ def binary_search(func, a, b, threshold):
     x_list = [0.5 * (a + b)]
     fa, fb = func(a), func(b)
     if fa * fb > 0:                                 # We should make sure that one is positive, and the other is negative.
-        raise ValueError("Solution not bracketed")
+        raise ValueError("Solution not above and below 0")
     iterations = 0
     while (b - a) / 2 > threshold:
         mid = 0.5 * (a + b)                         # find the midpoint
@@ -74,25 +74,12 @@ def newton(func, dfunc, x0, threshold):
 
 def main():
     print("----------<PART_C>----------")
-    # Exercise 6.13: Wien's displacement constant
-    # Planck's radiation law tells us that the intensity of radiation per unit area and per unit
-    # wavelength lambda from a black body at temperature T is:
-    # I(lambda) = (2 * pi * h * c^2 * lambda^-5) / ( exp( (hc) / (lambda * k_b * T) ) - 1 )
-    # where h is Planck's constant, c is the speed of light, and k_b is Boltzmann's constant.
-    # 
-    # a) The wavelength lambda at which the emitted radiation is strongest is the solution of the equation
-    # 5e ^( (hc) / (lambda * k_b * T) ) + h*c / (lambda * k_b * T) = 0.
-
+    # Part a teslls us that
     # And turns out that we can solve fox x in this equation, 5e^-x + x - 5 = 0.
     # and yield that b = h c / k_b x
 
-        # NO CODE TO SUBMIT FOR PART A, JUST USE THE RESULT.
-
-    # b) Write a program to solve this equation to an accuracy of  10- 6 using the
-    # binary search method, and hence find a value for the displacement constant.
-    # In addition to the binary search method, also try the relaxation and Newton’s
-    # methods. Count the number of iterations each method takes and then
-    # comment on their relative efficiencies.
+    # part b) Solve the equation above to an accuracy of 10 ^ -6. Using binary search method, relaxation and Newton’s
+    # methods. Count the number of iterations each method takes.
 
     # Binary search
     x_binary_list, iter_binary = binary_search(f, 1, 7, threshold=1e-6)
@@ -122,12 +109,9 @@ def main():
     print(f"{'Newton':<15}{x_newton:>12.6f}{iter_newton:>15}{b_newton:>20.3e}")
 
 
-    # c) The displacement law is the basis for the method of optical pyrometry, a method
-    # for measuring the temperatures of objects by observing the color of the thermal
-    # radiation they emit. The method is commonly used to estimate the surface temperatures 
-    # of astronomical bodies, such as the Sun. The wavelength peak in the
-    # Sun's emitted radiation falls at lambda = 502nm. From the equations above and your
-    # value of the displacement constant, estimate the surface temperature of the Sun
+    # c) The wavelength peak in the
+    #   Sun's emitted radiation falls at lambda = 502nm. From the equations above and your
+    #   value of the displacement constant, estimate the surface temperature of the Sun
 
     # Wien displacement law: lambda = b/T, so T = b/lambda.
     b = b_relax 
