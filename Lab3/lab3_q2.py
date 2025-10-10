@@ -9,8 +9,10 @@ from util import gaussxw as gsx
 from scipy.constants import speed_of_light
 import matplotlib.pyplot as plt
 
-PRINT_OUPUTS_FOR_PART_C = True
-PLOT_GRAPHS = True
+PRINT_OUPUTS_FOR_PART_C = False
+PLOT_GRAPHS = False
+
+GET_LAB5_VALUES = True
 
 
 # List of Constants used by g(x)
@@ -143,6 +145,24 @@ def main():
             plt.grid(True)
             plt.show()
 
+
+    if GET_LAB5_VALUES:
+        # Extra code for help in Lab 5...
+        print("ASDKLFAS;DFJASDFASFJLAKSDFJF")
+        x_c = c * np.sqrt(m/k)
+
+        x_0 = 1
+        T_x1, _, _, _, _ = compute_integral_with_gauss(200, 0, 1)
+        
+        x_0 = x_c
+        T_xxc, _, _, _, _ = compute_integral_with_gauss(200, 0, x_c)
+
+        x_0 = 10*x_c
+        T_x10xc, _, _, _, _ = compute_integral_with_gauss(200, 0, 10*x_c)
+
+        print(T_x1)
+        print(T_xxc)
+        print(T_x10xc)
 
     print("----------END----------")
 
