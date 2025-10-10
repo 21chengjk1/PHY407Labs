@@ -33,19 +33,46 @@ def main():
     # y_n will need to be padded out with 0s
     
     
-    # CONSTANTS:
-    alpha = np.pi / 20 / 10e-6
+    # -----------CONSTANTS-----------:
+    lam = 500e-9                # wavelength [m]
+    f = 1.0                     # focal length
+    w = 200e-6                  # grating width
+    W = 10 * w                  # Increased grating width W = 10w
+    a = 20e-6                   # slit width [m]
+    alpha = np.pi / a           # parameter for sin^2(alpha u)
+    screen_width = ...          # The screen width is defined in the plot.
 
+    N = 100                         # Number of Sample points
+    u = np.linspace(-w/2, w/2, N)   # A list of sample points.
 
+    q = np.sin(alpha * u)**2        # Define q = sin^2(alpha u)
 
-    N = 1000  # CHOOSE A SUITABLE NUMBER OF POINTS
-    n = np.arange(N)
-    y = np.sin(alpha * n)
+    P = 10 * N  # number of points after padding
+    y = np.zeros(P)
+    start = (P - N)//2  # center q(u) in padded array
+    y[start:start+N] = q
 
-    c = ...
+    C = np.fft.fft(y)    # Each term C_k corresponds to a discrete diffraction order.
 
-    ...
+    # I_k = (W / N)^2 * |C_k|^2 
+    I = (W / N)**2 * np.abs(C)**2
 
+    # x_k = (lambda f / W) * k, with k from 0 to P-1
+    k = np.arange(P)
+    k_signed = ((k + P//2) % P) - P//2  # shift indices
+    x = lam * f * k_signed / W          # position on the screen [m]
+
+    # ------------PLotting the Result.---------------------------
+    print("Printing Plots:")
+    plt.figure(figsize=(8, 4))
+    plt.plot(x * 1000, I, lw=1.2)
+    plt.xlabel("x on screen [mm]")
+    plt.ylabel("Normalized intensity")
+    plt.title("Diffraction pattern for q(u)")
+    plt.grid(True)
+    plt.xlim(-50, 50)
+    plt.tight_layout()
+    plt.show()
 
     # Will need to hand in code and plots and explanatory notes
     print("----------END----------")
