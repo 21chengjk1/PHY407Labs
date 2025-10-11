@@ -17,7 +17,7 @@ def dft(y):
 
 
 plot_count = 1
-def part_a_plots(y, c, coefficient_index, title):
+def part_a_plots(y, c, coefficient_index, function_name, title):
     """
     Helper for Part A
     """
@@ -25,14 +25,14 @@ def part_a_plots(y, c, coefficient_index, title):
 
     plt.figure(plot_count)
     plt.plot(y)
-    plt.title("Square Wave")
+    plt.title(function_name)
     plot_count += 1
 
     plt.figure(plot_count)
     plt.bar(coefficient_index, abs(c))
     # plt.plot(abs(c_square))
     plt.title(title)
-    plt.xlim(0, 500)
+    plt.xlim(0, 250)
     
     plot_count += 1
 
@@ -71,13 +71,13 @@ def main():
     c_sin = dft(y_sin)
 
     # Square wave
-    part_a_plots(y_square, c_square, coefficient_index, "Amplitude of Fourier Coefficients (Square Wave)")
+    part_a_plots(y_square, c_square, coefficient_index, "Square Wave", "Amplitude of Fourier Coefficients (Square Wave)")
 
     # Sawtooth waves
-    part_a_plots(y_sawtooth, c_sawtooth, coefficient_index, "Amplitude of Fourier Coefficients (Sawtooth)")
+    part_a_plots(y_sawtooth, c_sawtooth, coefficient_index, "Sawtooth", "Amplitude of Fourier Coefficients (Sawtooth)")
 
     # sin waves
-    part_a_plots(y_sin, c_sin, coefficient_index, "Amplitude of Fourier Coefficients (Modulated Sine)")
+    part_a_plots(y_sin, c_sin, coefficient_index, "Modulated Sine", "Amplitude of Fourier Coefficients (Modulated Sine)")
 
     plt.show()
 

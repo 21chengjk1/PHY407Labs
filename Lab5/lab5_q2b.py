@@ -10,7 +10,7 @@ from numpy import empty
 
 PLOT_WAV = True
 PLOT_TRANSFORM = True
-MAKE_NEW_WAV = False
+MAKE_NEW_WAV = True
 
 def main():
     print("----------START----------")

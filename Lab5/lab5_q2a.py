@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 from scipy.constants import speed_of_light
 
-PLOT_OSCILLATION = False
+PLOT_OSCILLATION = True
 
 
 k = 12      # k = 12N/m
@@ -31,7 +31,7 @@ def rel_acceleration(x, v):
     u2 = v
     c = speed_of_light
 
-    relativistic_factor = (1 - min(u2**2 / c**2, 0.9999)) ** (3/2)     # For lack of a better name.
+    relativistic_factor = (1 - u2**2 / c**2) ** (3/2)     # For lack of a better name.
     return - (k/m) * u1 * relativistic_factor
 
 def manul_integr(x_0, v_0, deltat, tot, acc = rel_acceleration):
@@ -70,18 +70,29 @@ def main():
     x_0_labels = ["1m", r"$x_c$", r"$10x_c$"]
 
     time_step = 0.0001
+    tot = 150
 
-    x1, v1, t = manul_integr(x_0=x_0_values[0], v_0=0, deltat=time_step, tot=20)
-    xx_c, vx_c, t = manul_integr(x_0=x_0_values[1], v_0=0, deltat=time_step, tot=20)
-    x10x_c, v10x_c, t = manul_integr(x_0=x_0_values[2], v_0=0, deltat=time_step, tot=20)
+    x1, v1, t = manul_integr(x_0=x_0_values[0], v_0=0, deltat=time_step, tot=tot)
+    xx_c, vx_c, t = manul_integr(x_0=x_0_values[1], v_0=0, deltat=time_step, tot=tot)
+    x10x_c, v10x_c, t = manul_integr(x_0=x_0_values[2], v_0=0, deltat=time_step, tot=tot)
     if PLOT_OSCILLATION:
         plt.figure(1)
-        plt.title("TITLESJFA")
+        plt.title(r"$x_0 = 1m$")
         plt.plot(t, x1, label=x_0_labels[0])
         plt.xlabel("t")
         plt.ylabel("x(t)")
-        # plt.ylim(-1.5, 1.5)
-        plt.legend()
+
+        plt.figure(2)
+        plt.title(r"$x_0 = x_c$")
+        plt.plot(t, xx_c, label=x_0_labels[1])
+        plt.xlabel("t")
+        plt.ylabel("x(t)")
+
+        plt.figure(3)
+        plt.title(r"$x_0 = 10x_c$")
+        plt.plot(t, x10x_c, label=x_0_labels[2])
+        plt.xlabel("t")
+        plt.ylabel("x(t)")
         plt.show()
 
     N = len(t)
@@ -110,7 +121,7 @@ def main():
     plt.xlim(0, 200)
 
     
-    T_values = [1.8102536520037136, 2.1270744013035268, 11.660887636522721]
+    T_values = [1.8102536520037136, 2.1270744013035268, 11.660887636522721]     # Running compute_integral_with_gauss() from lab 3 yielded these numbers.
     # Plot vertical lines
     for T in T_values:
         plt.axvline(1 / T, color='k', linestyle='--', linewidth=1, alpha=0.7)
