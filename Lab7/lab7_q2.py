@@ -4,6 +4,7 @@ Code for Lab 7 Question 2
 
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.constants import elementary_charge, electron_mass, hbar
 
 
 def main():
@@ -26,6 +27,44 @@ def main():
     # The quantum harmonic oscillator is known to have energy states that are 
     # equally spaced. Check that this is true, to the precision of your calculation, for 
     # your answers. (Hint: The ground state has energy in the range 100 to 200eV.) 
+
+    e = elementary_charge       # e = 1.6e-19 Coulomb
+    m = electron_mass           # m = 9.1e-31 kg
+    h_bar = hbar
+
+    V_0 = 50 * e                # 50eV --> 50 * e Joules
+    a = 1e-11                   # 10 ** -11 == 1 * 10**-11 = 1e-11
+
+    x_0 = -10 * a   # x = -10a to 10a
+    x_f = 10 * a    
+
+    N = 1000        # N Steps
+    h = (x_f - x_0) / N
+
+    def V_parta():
+        """
+        
+        """
+        return 
+
+    def f(r,x,E, V=V_parta):
+        psi = r[0]
+        phi = r[1]
+        fpsi = phi
+        fphi = (2*m/hbar**2)*(V(x)-E)*psi
+        return np.array([fpsi,fphi],float)
+
+    def solve(E):
+        psi = 0.0
+        phi = 1.0
+        r = np.array([psi,phi],float)
+        for x in np.arange(x_0,x_f,h):
+            k1 = h*f(r,x,E)
+            k2 = h*f(r+0.5*k1,x+0.5*h,E)
+            k3 = h*f(r+0.5*k2,x+0.5*h,E)
+            k4 = h*f(r+k3,x+h,E)
+            r += (k1+2*k2+2*k3+k4)/6
+        return r[0]
 
 
     # b) Now modify your program to calculate the same three energies for the 
