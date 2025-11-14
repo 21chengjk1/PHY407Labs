@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def lax_wendroff_step(u, N, beta):
-    """One Lax–Wendroff step for Burgers' equation."""
+    """One Lax Wendroff step for Burgers' equation."""
     u_next = np.zeros_like(u)
 
     for i in range(N):
@@ -27,8 +27,6 @@ def lax_wendroff_step(u, N, beta):
 def main():
     print("----------START----------")
     print("Hi! Welcome to Lab 9 Question 3!")
-
-    # Code...
 
     # Parameters, same as Lab 8 Q3.
     eps = 1.0           
