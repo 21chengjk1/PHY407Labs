@@ -1,15 +1,17 @@
 from random import random,randrange
 from math import exp,pi
-from numpy import ones
+import numpy as np
 import matplotlib.pyplot as plt
 
 T = 10.0
 L = 10.0
+L = 1
 N = 1000
-steps = 10000000
+steps = 10000000    
+steps = 100000
 
 # Create a 2D array to store the quantum numbers
-n = ones([N,3],int)
+n = np.ones([N,3],int)
 
 # Main loop
 eplot = []
